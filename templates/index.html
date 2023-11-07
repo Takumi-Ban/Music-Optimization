@@ -16,29 +16,38 @@
           <label class="form-label">プレイリスト制限時間</label>
           <div class="row">
             <div class="col-4">
-              <input type="text" class="form-control" name="hour" placeholder="時間(hour)">
+              <input type="text" class="form-control" name="hour" placeholder="時間(hour)" required>
             </div>
             <div class="col-4">
-              <input type="text" class="form-control" name="minute" placeholder="分(min)">
+              <input type="text" class="form-control" name="minute" placeholder="分(min)" required>
             </div>
             <div class="col-4">
-              <input type="text" class="form-control" name="seconds" placeholder="時間(sec)">
+              <input type="text" class="form-control" name="seconds" placeholder="時間(sec)" required>
             </div>
           </div>
           <button class="btn btn-primary" type="submit">生成</button>
         </form>
         {% if ordered_songs %}
         <h3>生成されたプレイリスト</h3>
-        <ul>
-          {% for song in ordered_songs %}
-          <li>{{ song[1] }}</li>
-          {% endfor %}
-        </ul>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">曲名</th>
+              <th scope="col">アーティスト名</th>
+              <th scope="col">URL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for song in ordered_songs %}
+            <tr>
+              <td>{{song[1]}}</td>
+              <td>{{song[4]}}</td>
+              <td>{{song[3]}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
         <p>再生時間: {{ total_time }}</p>
-        {% for song in ordered_songs %}
-        <p>{{ song[1] }}</p>
-        <iframe width="560" height="315" src="{{song[3]}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        {% endfor %}
         {% endif %}
     </div>
     <!-- Bootstrap Bundle with Popper -->

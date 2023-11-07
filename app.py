@@ -20,9 +20,8 @@ def post_index():
   sec = int(request.form['seconds'])
   time = hour * 3600 + minute * 60 + sec
 
-  songs = session.query(MusicInfo.id, MusicInfo.music_name, MusicInfo.length, MusicInfo.url).all()
+  songs = session.query(MusicInfo.id, MusicInfo.music_name, MusicInfo.length, MusicInfo.url, MusicInfo.artist_name).all()
   selected_songs, total_time = select_songs(time, songs)
-  print(selected_songs)
   names = [song[1] for song in selected_songs]
   ordered_index = order_songs(names)
   ordered_songs = [songs[i] for i in ordered_index]
